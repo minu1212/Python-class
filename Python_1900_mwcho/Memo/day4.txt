@@ -1,0 +1,101 @@
+#day3 review
+    "str".format method
+    레퍼런스 사이트 맛보기(www.python.org,doc)
+    제어문 - 조건문
+        조건문 : "조건에 따라 다른 것" 을 구현하는 문장
+        if statement       stetement(조건문)
+        if
+        if-else
+        if-elif
+        if-elif-else
+
+3. 제어문 (계속)
+(2) 반복문
+    -loop, iteration,우리나라에서는 뺑뺑이라고도 함
+    -어떤 작업을 한 번이 아니라 여러 번 계속해서 수행하는 것
+    -동일 작업을 10000번  할 것을, 10000줄을 코딩할 수 없기 때문에
+    -while, for
+
+    1) while
+    -특정 조건을 만족하는 동안 반복해서 수행
+
+    *형태
+    while 조건식 :
+        조건식이 True일 때 수행할 문장
+
+     *기본 사용 예
+     i = 0
+     while i < 10:
+        print(i)
+        i = i + 1
+
+    *참고
+    - 무한 loop(infinite loop)
+    while true
+        print("수행할 문장")
+
+    - 탈출 조건이 될 때가지 계속 수행할 때 사용. 아래와 같은 형태
+    while true:
+        수행할 일
+        if 탈출 조건 :
+            break
+
+    -break : 루프문을 탈출
+    -continue : 루프문을 계속, 아래부분을 수행하지 않고 loop 꼭대기롤 올라감
+
+
+    2) for stetement
+    - 범위나 회수가 정해져 있는 동안 반복해서 수행
+
+    * 형태
+    for 변수 in 집합(때거지):
+        반복해서 실행할 문장
+
+
+    * 기본 사용 예
+    for n in [1,2,3]:
+        print(n)
+    첫 번째는 1출력, 두번째는 2출력, 세번째는 3출력
+
+    *참고
+    집합(대거지) : 문자열(str), 리스트(list), 튜플(tuple), 레인지(range),
+                세트(set), 딕셔너리(dict)
+
+    for str in '문자열 집합': # 문자열
+        print(str)
+    for lst in ['첫번째','두번째','세번째'];
+        print(lst)
+
+    vivaldi_season4 = ('Sprint','Summer','Fall','winter')
+    # tuple은 수정, 삭제가 안됨
+    for season in vivaldi_season4:
+        print(season)
+
+    vivaldi_season4 = {'Sprint','Summer','Fall','winter'}
+    for season in vivaldi_season4:
+        print(season)
+
+    ********중요  ->range *******
+    range(초기값, 종료값, 증감값)
+    -초긱값부터 종료값까지 증감값만큼 차이를 갖는 그룹
+    - 초기값 : 생략가능, 생략하면 0
+    - 종료값 : 생략불가능
+    - 증가값 : 생략가능, 생략하면 1
+
+    range(1,5,1)  -> 1,2,3,4,5
+    range(5) # == range(1,5,1)
+    -> 0부터 1식 증가
+
+
+    ********초고난이도 dict ************
+    -최근 많이 쓰이는 자료구조형인 key, value로 저장하는 방식
+    person =  {'name':'jwlee','age':100}
+    for item in person
+        print(item)
+
+
+
+
+
+
+
