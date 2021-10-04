@@ -13,10 +13,17 @@
     4. 승리 또는 패배에 따라 메시지를 출력합니다.
 """
 import random
+import colors as cl
+
+#1-0 opening
+print("*"*40)
+print("게임을 시작하겠습니다")
+print("*"*40)
 
 # 1-1. 보물상자를 발견햇다는 메시지를 출력하고 사용자가 아무키를 누르기를 기다린다.
 #       print,input 익히기
-print("당신은 길을 가다가 [보물상자]를 발견했습니다.")
+# print("당신은 길을 가다가 [보물상자]를 발견했습니다.")
+print("당신은 길을 가다가 " + cl.YELLOW + "[보물상자]" + cl.END +"를 발견했습니다.")
 # input()
 
 
@@ -27,16 +34,37 @@ weapons = [['휴지',1,3],['목검',3,5],['대검',5,10],['대포',1,50],['에�
 # print(weapons[1])
 
 sel = random.randint(0,4)
-print("당신은 [{}]을(를) 획득하였습니다.".format(weapons[sel][0]))
+# print("당신은 [{}]을(를) 획득하였습니다.".format(weapons[sel][0]))
+if sel == 0:
+    print("당신은 [{}]을(를) 획득하였습니다.".format(weapons[sel][0]))
+elif sel == 1:
+    print("당신은" + cl.GREEN + "[{}]".format(weapons[sel][0]) + cl.END + "을(를) 획득하였습니다.")
+elif sel == 2:
+    print("당신은" + cl.BLUE + "[{}]".format(weapons[sel][0]) + cl.END + "을(를) 획득하였습니다.")
+elif sel == 3:
+    print("당신은" + cl.YELLOW + "[{}]".format(weapons[sel][0]) + cl.END + "을(를) 획득하였습니다.")
+elif sel == 4:
+    print("당신은" + cl.MAGENTA + "[{}]".format(weapons[sel][0]) + cl.END + "을(를) 획득하였습니다.")
+
+
 my_weapon = weapons[sel]
-print(my_weapon)
+# print(my_weapon)
+
+MYIMAGE = "0000000000"
+
+MONIMAGE = ["AAAAAAAAAA","BBBBBBBBBB","CCCCCCCCCC"]
+
 
 # 2-1. 길을 가다 랜덤으로 몬스터를 만난다. random 함수 및 리스트 활용법 익히기
 #       각 몬스터는 [몬스터명, 최소공격력, 최대공격력]의 데이터를 가짐
 mons = [['늑대',1,3],['산적',5,10],['드래곤',1,100]]
 sel = random.randint(0,2)
-print("당신은 길을 가다가 [{}]을(를) 만났습니다".format(mons[sel][0]))
+if sel == 2:
+    print("당신은 길을 가다가" + cl.RED + "[{}]".format(mons[sel][0]) + cl.END + "을(를) 만났습니다")
+else:
+    print("당신은 길을 가다가 [{}]을(를) 만났습니다".format(mons[sel][0]))
 my_mon = mons[sel]
+
 
 # 3-1. 초기 양쪽의 에너지는 100이다. my_energy, mon_energy에 저장한다.
 my_energy = 100
@@ -59,7 +87,23 @@ while True: #전투 무한루프
         damage = random.randint(my_weapon[1],my_weapon[2]) #my_weaoib[1] : 최소공격력
         mon_energy = mon_energy - damage
         print("당신은 {}으로 {}의 데미지를 입혔습니다. {}의 체력 : {}".format(my_weapon[0],damage,my_mon[0],mon_energy))
-        if mon_energy < 0:
+
+        print(MYIMAGE + " " * 11 + MONIMAGE[sel])
+        if my_energy > 30:
+            energy_str = cl.GREEN_BG + " " * int(my_energy/5) + cl.END + " " * (21 - int(my_energy/5))
+        elif my_energy < 30:
+            energy_str = cl.RED_BG + " " * int(my_energy / 5) + cl.END + " " * (21 - int(my_energy/5))
+        else:
+            energy_str = " " * 21
+
+        if mon_energy > 30:
+            energy_str += cl.GREEN_BG + " " * int(mon_energy / 5) + cl.END
+        else:
+            energy_str += cl.RED_BG + " " * int(mon_energy / 5) + cl.END
+
+        print(energy_str)
+
+        if mon_energy <= 0:
             break
 
     elif user_input == '2': #회복이면
@@ -67,19 +111,56 @@ while True: #전투 무한루프
         my_energy = my_energy + heal
         print("당신은 회복으로 {}의 에너지가 회복되었습니다. 당신의 체력 : {}".format(heal,my_energy))
 
-    # 3-5. 몬스터가 공격을 한다.
+        print(MYIMAGE + " " * 11 + MONIMAGE[sel])
+        if my_energy > 30:
+            energy_str = cl.GREEN_BG + " " * int(my_energy / 5) + cl.END + " " * (21 - int(my_energy / 5))
+        elif my_energy > 0:
+            energy_str = cl.RED_BG + " " * int(my_energy / 5) + cl.END + " " * (21 - int(my_energy / 5))
+        else:
+            energy_str = " " * 21
+
+        if mon_energy > 30:
+            energy_str += cl.GREEN_BG + " " * int(mon_energy / 5) + cl.END
+        else:
+            energy_str += cl.RED_BG + " " * int(mon_energy / 5) + cl.END
+
+        print(energy_str)
+
+        # 3-5. 몬스터가 공격을 한다.
     damage = random.randint(my_mon[1],my_mon[2])
     my_energy = my_energy - damage
     print("당신은 {}의 공격으로 {}의 피해를 입었습니다. 당신의 체력 : {}".format(my_mon[0],damage,my_energy))
-    if my_energy < 0:
+    if my_energy <= 0:
         break
 
+    print(MYIMAGE + " " * 11 + MONIMAGE[sel])
+    if my_energy > 30:
+        energy_str = cl.GREEN_BG + " " * int(my_energy / 5) + cl.END + " " * (21 - int(my_energy / 5))
+    elif my_energy > 0:
+        energy_str = cl.RED_BG + " " * int(my_energy / 5) + cl.END + " " * (21 - int(my_energy / 5))
+    else:
+        energy_str = " " * 21
+
+    if mon_energy > 30:
+        energy_str += cl.GREEN_BG + " " * int(mon_energy / 5) + cl.END
+    else:
+        energy_str += cl.RED_BG + " " * int(mon_energy / 5) + cl.END
+
+    print(energy_str)
 
     # break
 
 # 4-1. 승리 또는 패배에 따라 화면에 메시지를 출력한다.
-if mon_energy < 0:
+if mon_energy <= 0:
     print("{}이(가) 말했습니다. 강하군".format(my_mon[0]))
+    print("{}이(가) [붉은 보석을]을 주었습니다.".format(my_mon[0]))
+    print(cl.YELLOW + "당신의 승리입니다." + cl.END)
 else:
     print("{}이(가) 말했습니다. 하하하 상대도 안되는군 ㅋㅋㅋ".format(my_mon[0]))
+    print("{}이(가) [내 가방]을 가져갔습니다. 아씨 명품인데".format(my_mon[0]))
+    print(cl.RED + "당신의 패배입니다." + cl.END)
 
+#1-0 closeing
+print("*"*40)
+print("게임을 종료하겠습니다")
+print("*"*40)
